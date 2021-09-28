@@ -1,0 +1,14 @@
+from bs4 import BeautifulSoup
+import random
+import requests
+def complement():
+    url = 'https://heaclub.ru/100-luchshih-samyh-krasivyh-komplimentov-devushke-i-zhenshhine-o-ee-krasote-svoimi-slovami-v-proze-spisok-kak-krasivo-skazat-devushke-chto-ona-krasivaya-stishki-chetverostishya-pro-krasotu-devus'
+    response= requests.get(url)
+    soap = BeautifulSoup(response.text,"html.parser")
+    words = soap.find_all('em')
+    y = []
+    for word in words:
+        y.append(word.text)
+    return(str(y[:100]))
+with open('complement.txt','w') as f:
+    f.write(complement())
